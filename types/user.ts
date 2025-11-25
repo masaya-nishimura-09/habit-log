@@ -1,6 +1,6 @@
 export interface User {
   id: string;
-  username: string;
+  name: string;
   email: string;
   password: string;
   created_at: string;
@@ -8,7 +8,7 @@ export interface User {
 
 export interface RegisterState {
   errors?: {
-    username?: string[];
+    name?: string[];
     email?: string[];
     password?: string[];
     confirmedPassword?: string[];

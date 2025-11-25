@@ -10,7 +10,6 @@ import type { LoginState, RegisterState } from "@/types/user";
 
 export async function getUserSession() {
   const session = await auth();
-  console.log(session);
   return session?.user;
 }
 
@@ -24,7 +23,7 @@ export async function getUserId() {
 
 export async function register(_prevState: RegisterState | undefined, formData: FormData) {
   const validatedFields = RegisterFormSchema.safeParse({
-    username: formData.get("username"),
+    name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
     confirmedPassword: formData.get("confirmed-password"),
@@ -37,14 +36,14 @@ export async function register(_prevState: RegisterState | undefined, formData: 
     };
   }
 
-  const { username, email, password } = validatedFields.data;
+  const { name, email, password } = validatedFields.data;
 
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   const { error } = await supabase
     .from("users")
-    .insert({ username: username, email: email, password: hashedPassword });
+    .insert({ name: name, email: email, password: hashedPassword });
   if (error) {
     console.error(error);
     if (error.code === "23505") {

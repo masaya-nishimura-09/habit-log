@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const RegisterFormSchema = z
   .object({
-    username: z
+    name: z
       .string({
         message: "ユーザーネームを入力してください。",
       })

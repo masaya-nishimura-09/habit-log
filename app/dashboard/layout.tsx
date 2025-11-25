@@ -1,5 +1,3 @@
-// todo: ユーザーネームも取得（メールはできてる）
-
 import { getUserSession } from "@/actions/user-actions";
 import { SiteHeader } from "@/components/containers/header/site-header";
 import { AppSidebar } from "@/components/containers/sidebar/app-sidebar";

@@ -41,16 +41,16 @@ export default function RegisterForm() {
         <form id="register-form" action={formAction}>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="username">ユーザーネーム</Label>
+              <Label htmlFor="name">ユーザーネーム</Label>
               <Input
-                id="username"
-                name="username"
+                id="name"
+                name="name"
                 type="text"
                 placeholder="ユーザーネームを入力して下さい"
                 required
               />
               <div aria-live="polite" aria-atomic="true">
-                {state?.errors?.username?.map((error: string) => (
+                {state?.errors?.name?.map((error: string) => (
                   <p className="mt-2 text-red-500 text-sm" key={error}>
                     {error}
                   </p>
