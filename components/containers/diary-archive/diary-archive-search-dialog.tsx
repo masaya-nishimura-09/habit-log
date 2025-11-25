@@ -1,11 +1,5 @@
 "use client";
 
-import { Table } from "@tanstack/react-table";
-import { ja } from "date-fns/locale";
-import { ChevronDown } from "lucide-react";
-import * as React from "react";
-import { useState } from "react";
-import type { DateRange } from "react-day-picker";
 import { fetchDiaries } from "@/actions/diaries-actions";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -34,6 +28,12 @@ import {
 } from "@/lib/date/date";
 import { diaryColumns } from "@/lib/diaries/diary-columns";
 import { DateRangeStr, Diary, DiaryColumns } from "@/types/diaries";
+import { Table } from "@tanstack/react-table";
+import { ja } from "date-fns/locale";
+import { ChevronDown } from "lucide-react";
+import * as React from "react";
+import { useState } from "react";
+import type { DateRange } from "react-day-picker";
 
 export default function DiaryArchiveSearchDialog({
   setDiaries,
@@ -47,7 +47,7 @@ export default function DiaryArchiveSearchDialog({
     from: getDateOneMonthAgo(),
     to: getDateStr(),
   });
-  const [selectedColumn, setSelectedColumn] = useState<string>("したこと");
+  const [selectedColumn, setSelectedColumn] = useState<string>("行ったこと");
 
   async function handleFilterByRange(selectedDateRange: DateRange | undefined) {
     setDateRange(selectedDateRange);
@@ -70,7 +70,7 @@ export default function DiaryArchiveSearchDialog({
       <CardAction>
         <Dialog>
           <DialogTrigger>
-            <Button variant="outline">詳細検索</Button>
+            <Button>詳細検索</Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>

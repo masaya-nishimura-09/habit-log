@@ -3,9 +3,9 @@ import { z } from "zod";
 export const DiaryFormSchema = z.object({
   done: z
     .string({
-      message: "今日したことを入力してください。",
+      message: "今日行ったことを入力してください。",
     })
-    .min(1, "今日したことを入力してください。"),
+    .min(1, "今日行ったことを入力してください。"),
   learned: z
     .string({
       message: "今日学んだことを入力してください。",

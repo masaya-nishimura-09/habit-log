@@ -1,8 +1,8 @@
+// todo: その日の感情を選んで記録（自己分析やネガティブ管理に利用）
+// todo: 感情の変化をグラフ化
+
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { Toaster, toast } from "sonner";
 import { createDiary } from "@/actions/diaries-actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +19,9 @@ import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { getDateStr, getDateWithDayOfWeek } from "@/lib/date/date";
 import { Diary } from "@/types/diaries";
+import Link from "next/link";
+import { useState } from "react";
+import { Toaster, toast } from "sonner";
 
 export function DiaryForm({ data }: { data?: Diary }) {
   const [isPending, setIsPending] = useState(false);
@@ -54,9 +57,11 @@ export function DiaryForm({ data }: { data?: Diary }) {
           振り返りの時間。今日の出来事と学びを記録し、明日への糧にしましょう。
         </CardDescription>
         <CardAction>
-          <Button variant="outline">
-            <Link href={getDateStr()}>今日の日記</Link>
-          </Button>
+          {diary.date !== getDateStr() && (
+            <Button>
+              <Link href={getDateStr()}>今日の日記</Link>
+            </Button>
+          )}
         </CardAction>
       </CardHeader>
       <CardContent className="scrollable">
@@ -65,7 +70,7 @@ export function DiaryForm({ data }: { data?: Diary }) {
           <div className="flex flex-col gap-6">
             <input type="hidden" name="date" value={diary.date}></input>
             <div className="grid gap-2">
-              <Label htmlFor="done">今日したこと</Label>
+              <Label htmlFor="done">今日行ったこと</Label>
               <Textarea
                 className="h-20 resize-none overflow-y-auto"
                 id="done"
