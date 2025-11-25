@@ -1,12 +1,18 @@
 "use server";
 
-import bcrypt from "bcryptjs";
-import { AuthError } from "next-auth";
 import { auth, signIn, signOut } from "@/auth";
 import { LoginFormSchema } from "@/lib/schemas/login-form";
 import { RegisterFormSchema } from "@/lib/schemas/register-form";
 import { supabase } from "@/lib/supabase";
 import type { LoginState, RegisterState } from "@/types/user";
+import bcrypt from "bcryptjs";
+import { AuthError } from "next-auth";
+
+export async function getUserSession() {
+  const session = await auth();
+  console.log(session);
+  return session?.user;
+}
 
 export async function getUserId() {
   const session = await auth();
@@ -40,6 +46,7 @@ export async function register(_prevState: RegisterState | undefined, formData: 
     .from("users")
     .insert({ username: username, email: email, password: hashedPassword });
   if (error) {
+    console.error(error);
     if (error.code === "23505") {
       return {
         message: "このメールアドレスはすでに使用されています。",

@@ -1,9 +1,9 @@
-import bcrypt from "bcryptjs";
-import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "@/auth.config";
 import { supabase } from "@/lib/supabase";
 import type { User } from "@/types/user";
+import bcrypt from "bcryptjs";
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 import { LoginFormSchema } from "./lib/schemas/login-form";
 
 async function getUser(email: string): Promise<User | undefined> {
@@ -46,7 +46,9 @@ export const { auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (session.user) session.user.id = token.id as string;
+      if (session.user) {
+        session.user.id = token.id as string;
+      }
       return session;
     },
   },

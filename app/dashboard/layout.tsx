@@ -1,8 +1,11 @@
+import { getUserSession } from "@/actions/user-actions";
 import { SiteHeader } from "@/components/containers/header/site-header";
 import { AppSidebar } from "@/components/containers/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const userData = await getUserSession();
+
   return (
     <SidebarProvider
       style={
@@ -12,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      <AppSidebar variant="inset" userData={userData} />
       <SidebarInset className="flex h-100vh flex-col">
         <SiteHeader />
         <main className="h-full p-4">{children}</main>
