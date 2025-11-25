@@ -1,6 +1,7 @@
 "use client";
 
 import { IconNotebook } from "@tabler/icons-react";
+// import { User } from "@/types/user";
 import {
   Sidebar,
   SidebarContent,
@@ -15,7 +16,18 @@ import { NavMain } from "./nav-main";
 import { NavSecondary } from "./nav-secondary";
 import { NavUser } from "./nav-user";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
+  userData:
+    | {
+        id?: string | undefined;
+        name?: string | null | undefined;
+        email?: string | null | undefined;
+        image?: string | null | undefined;
+      }
+    | undefined;
+};
+
+export function AppSidebar({ ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -35,7 +47,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={items.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={items.user} />
+        <NavUser userData={props.userData} />
       </SidebarFooter>
     </Sidebar>
   );
