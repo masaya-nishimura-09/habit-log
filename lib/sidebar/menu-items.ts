@@ -1,4 +1,3 @@
-import { getDateStr } from "@/lib/date/date";
 import {
   IconCheckbox,
   IconHelp,
@@ -7,6 +6,7 @@ import {
   IconSearch,
   IconSettings,
 } from "@tabler/icons-react";
+import { getDateStr } from "@/lib/date/date";
 
 // Menu items.
 export const items = {
