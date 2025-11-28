@@ -1,6 +1,3 @@
-import { ja } from "date-fns/locale";
-import { ChevronDownIcon } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +6,9 @@ import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { formatDateToYYYYMMDD, getDateWithDayOfWeek } from "@/lib/date/date";
 import { NegativeNotesFormData } from "@/types/negative-notes";
+import { ja } from "date-fns/locale";
+import { ChevronDownIcon } from "lucide-react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 export default function InputEvent({
   formData,
@@ -26,7 +26,7 @@ export default function InputEvent({
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="description">起きたこと</Label>
+          <Label htmlFor="description">何が起きた？</Label>
           <Input
             id="description"
             type="text"
@@ -37,13 +37,12 @@ export default function InputEvent({
                 description: e.target.value,
               })
             }
-            placeholder="起きたことを入力して下さい。"
           />
         </div>
 
         <div className="grid gap-2">
           <Label htmlFor="when" className="px-1">
-            いつ
+            いつ起きた？
           </Label>
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -73,7 +72,7 @@ export default function InputEvent({
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="where">場所</Label>
+          <Label htmlFor="where">どこで起きた？</Label>
           <Input
             id="where"
             type="text"
@@ -84,12 +83,11 @@ export default function InputEvent({
                 where: e.target.value,
               })
             }
-            placeholder="場所を入力して下さい。"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="withWhom">誰と</Label>
+          <Label htmlFor="withWhom">誰がいた？</Label>
           <Input
             id="withWhom"
             type="text"
@@ -100,12 +98,11 @@ export default function InputEvent({
                 withWhom: e.target.value,
               })
             }
-            placeholder="関わった人を入力して下さい。"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="userAction">行動</Label>
+          <Label htmlFor="userAction">そのとき何をした？</Label>
           <Input
             id="userAction"
             type="text"
@@ -116,7 +113,6 @@ export default function InputEvent({
                 userAction: e.target.value,
               })
             }
-            placeholder="そのときとった行動を入力して下さい。"
           />
         </div>
       </CardContent>

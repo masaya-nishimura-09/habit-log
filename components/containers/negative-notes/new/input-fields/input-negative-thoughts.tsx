@@ -53,7 +53,7 @@ export default function InputNegativeThoughts({
             id="negativeThoughts"
             value={negativeThought.name}
             type="text"
-            placeholder="例: "
+            placeholder="例: イライラする, 自分はダメだ"
             onChange={(e) => setNegativeThought({ ...negativeThought, name: e.target.value })}
           />
           <Button type="button" variant="outline" onClick={handleNewNegativeThought}>

@@ -1,9 +1,5 @@
 "use client";
 
-import { ja } from "date-fns/locale";
-import { ChevronDownIcon } from "lucide-react";
-import { useState } from "react";
-import { Toaster, toast } from "sonner";
 import { createHabit } from "@/actions/habits-actions";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -28,6 +24,10 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import { formatDateToYYYYMMDD, getDateWithDayOfWeek } from "@/lib/date/date";
 import { HabitFormState } from "@/types/habits";
+import { ja } from "date-fns/locale";
+import { ChevronDownIcon } from "lucide-react";
+import { useState } from "react";
+import { Toaster, toast } from "sonner";
 
 export default function NewHabits() {
   const today = new Date();
@@ -67,7 +67,7 @@ export default function NewHabits() {
   return (
     <Button className="size-full">
       <Dialog>
-        <DialogTrigger>習慣を追加</DialogTrigger>
+        <DialogTrigger>新規作成</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>新しい習慣</DialogTitle>

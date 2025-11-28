@@ -28,7 +28,7 @@ export default function NewNegativeNotes() {
   });
 
   return (
-    <Card>
+    <Card className="size-full">
       <CardHeader>
         <CardTitle>ネガティブノートを作成</CardTitle>
       </CardHeader>

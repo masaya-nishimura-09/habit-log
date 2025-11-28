@@ -1,3 +1,4 @@
+import NegativeNotes from "@/components/containers/negative-notes/negative-notes";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <div className="size-full">
-      <h1>ネガティブノート</h1>
+      <NegativeNotes />
     </div>
   );
 }
