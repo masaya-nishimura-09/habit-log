@@ -27,29 +27,26 @@ export default function NewNegativeNotes() {
   });
 
   return (
-    <Card className="size-full">
-      <CardHeader>
-        <CardTitle>ネガティブノートを作成</CardTitle>
-      </CardHeader>
-      <CardContent className="grid h-full md:grid-cols-2 gap-2">
-        <div className="flex h-full flex-col gap-2">
+    <div className="size-full flex flex-col gap-4">
+      <div className="grid h-full md:grid-cols-2 gap-4">
+        <div className="flex h-full flex-col gap-4">
           <InputEvent formData={formData} setFormData={setFormData} />
           <InputEmotion formData={formData} setFormData={setFormData} />
         </div>
-        <div className="flex h-full flex-col gap-2">
+        <div className="flex h-full flex-col gap-4">
           <InputNegativeThoughts formData={formData} setFormData={setFormData} />
           <InputPhysicalReaction formData={formData} setFormData={setFormData} />
           <InputDesiredState formData={formData} setFormData={setFormData} />
         </div>
-      </CardContent>
-      <CardFooter className="flex gap-2">
+      </div>
+      <div className="flex gap-2">
         <Button type="submit" form="negative-note-form">
           保存
         </Button>
         <Button type="submit" variant="outline" form="negative-note-form">
           キャンセル
         </Button>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }
