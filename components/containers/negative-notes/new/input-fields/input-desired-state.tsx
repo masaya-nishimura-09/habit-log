@@ -1,8 +1,8 @@
+import { Dispatch, SetStateAction } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { NegativeNotesFormData } from "@/types/negative-notes";
-import { Dispatch, SetStateAction } from "react";
 
 export default function InputDesiredState({
   formData,
@@ -12,7 +12,7 @@ export default function InputDesiredState({
   setFormData: Dispatch<SetStateAction<NegativeNotesFormData>>;
 }) {
   return (
-    <Card>
+    <Card className="size-full">
       <CardHeader>
         <CardTitle>本当はどうなりたいか</CardTitle>
       </CardHeader>

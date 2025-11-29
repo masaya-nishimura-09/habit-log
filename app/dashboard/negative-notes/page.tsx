@@ -1,5 +1,5 @@
-import NegativeNotes from "@/components/containers/negative-notes/negative-notes";
 import type { Metadata } from "next";
+import NegativeNotes from "@/components/containers/negative-notes/negative-notes";
 
 export const metadata: Metadata = {
   title: "ネガティブノート",

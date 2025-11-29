@@ -1,10 +1,10 @@
+import { IconCircleX } from "@tabler/icons-react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { NegativeNotesFormData } from "@/types/negative-notes";
-import { IconCircleX } from "@tabler/icons-react";
-import { Dispatch, SetStateAction, useState } from "react";
 
 export default function InputPhysicalReaction({
   formData,
@@ -43,7 +43,7 @@ export default function InputPhysicalReaction({
   }
 
   return (
-    <Card>
+    <Card className="size-full">
       <CardHeader>
         <CardTitle>身体反応や気分の変化</CardTitle>
       </CardHeader>

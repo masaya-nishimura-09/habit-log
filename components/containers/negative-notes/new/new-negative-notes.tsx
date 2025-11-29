@@ -1,9 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { NegativeNotesFormData } from "@/types/negative-notes";
-import { useState } from "react";
 import InputDesiredState from "./input-fields/input-desired-state";
 import InputEmotion from "./input-fields/input-emotion";
 import InputEvent from "./input-fields/input-event";
@@ -31,7 +31,7 @@ export default function NewNegativeNotes() {
       <CardHeader>
         <CardTitle>ネガティブノートを作成</CardTitle>
       </CardHeader>
-      <CardContent className="grid h-full grid-cols-2 gap-2">
+      <CardContent className="grid h-full md:grid-cols-2 gap-2">
         <div className="flex h-full flex-col gap-2">
           <InputEvent formData={formData} setFormData={setFormData} />
           <InputEmotion formData={formData} setFormData={setFormData} />

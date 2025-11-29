@@ -1,3 +1,6 @@
+import { ja } from "date-fns/locale";
+import { ChevronDownIcon } from "lucide-react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,9 +9,6 @@ import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { formatDateToYYYYMMDD, getDateWithDayOfWeek } from "@/lib/date/date";
 import { NegativeNotesFormData } from "@/types/negative-notes";
-import { ja } from "date-fns/locale";
-import { ChevronDownIcon } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
 
 export default function InputEvent({
   formData,
@@ -20,7 +20,7 @@ export default function InputEvent({
   const [open, setOpen] = useState(false);
 
   return (
-    <Card>
+    <Card className="size-full">
       <CardHeader>
         <CardTitle>ネガティブだと思った出来事の説明</CardTitle>
       </CardHeader>

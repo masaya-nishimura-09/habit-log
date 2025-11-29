@@ -20,7 +20,7 @@ export default function InputEmotion({
   setFormData: Dispatch<SetStateAction<NegativeNotesFormData>>;
 }) {
   return (
-    <Card>
+    <Card className="size-full">
       <CardHeader>
         <CardTitle>今の感情は？</CardTitle>
         <CardDescription></CardDescription>
