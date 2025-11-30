@@ -4,14 +4,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { NegativeNotesFormData } from "@/types/negative-notes";
+import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
 
 export default function InputPhysicalReaction({
   formData,
   setFormData,
+  state,
 }: {
-  formData: NegativeNotesFormData;
-  setFormData: Dispatch<SetStateAction<NegativeNotesFormData>>;
+  formData: NegativeNoteFormData;
+  setFormData: Dispatch<SetStateAction<NegativeNoteFormData>>;
+  state: NegativeNoteFormState;
 }) {
   const [reaction, setReaction] = useState({
     id: 0,
@@ -77,6 +79,11 @@ export default function InputPhysicalReaction({
               </Badge>
             ))}
           </div>
+          {state?.errors?.reactions?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
       </CardContent>
     </Card>

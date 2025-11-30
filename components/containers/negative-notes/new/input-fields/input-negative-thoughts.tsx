@@ -4,14 +4,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { NegativeNotesFormData } from "@/types/negative-notes";
+import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
 
 export default function InputNegativeThoughts({
   formData,
   setFormData,
+  state,
 }: {
-  formData: NegativeNotesFormData;
-  setFormData: Dispatch<SetStateAction<NegativeNotesFormData>>;
+  formData: NegativeNoteFormData;
+  setFormData: Dispatch<SetStateAction<NegativeNoteFormData>>;
+  state: NegativeNoteFormState;
 }) {
   const [negativeThought, setNegativeThought] = useState({
     id: 0,
@@ -76,6 +78,11 @@ export default function InputNegativeThoughts({
             </Badge>
           ))}
         </div>
+        {state?.errors?.negativeThoughts?.map((error: string) => (
+          <p className="text-red-500 text-sm" key={error}>
+            {error}
+          </p>
+        ))}
       </CardContent>
     </Card>
   );

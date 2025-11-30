@@ -2,14 +2,16 @@ import { Dispatch, SetStateAction } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { NegativeNotesFormData } from "@/types/negative-notes";
+import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
 
 export default function InputDesiredState({
   formData,
   setFormData,
+  state,
 }: {
-  formData: NegativeNotesFormData;
-  setFormData: Dispatch<SetStateAction<NegativeNotesFormData>>;
+  formData: NegativeNoteFormData;
+  setFormData: Dispatch<SetStateAction<NegativeNoteFormData>>;
+  state: NegativeNoteFormState;
 }) {
   return (
     <Card className="size-full">
@@ -30,6 +32,11 @@ export default function InputDesiredState({
               })
             }
           />
+          {state?.errors?.idealState?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
 
         <div className="grid gap-2">
@@ -45,6 +52,11 @@ export default function InputDesiredState({
               })
             }
           />
+          {state?.errors?.desiredTreatment?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
 
         <div className="grid gap-2">
@@ -60,6 +72,11 @@ export default function InputDesiredState({
               })
             }
           />
+          {state?.errors?.desiredFeeling?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
       </CardContent>
     </Card>

@@ -8,14 +8,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { formatDateToYYYYMMDD, getDateWithDayOfWeek } from "@/lib/date/date";
-import { NegativeNotesFormData } from "@/types/negative-notes";
+import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
 
 export default function InputEvent({
   formData,
   setFormData,
+  state,
 }: {
-  formData: NegativeNotesFormData;
-  setFormData: Dispatch<SetStateAction<NegativeNotesFormData>>;
+  formData: NegativeNoteFormData;
+  setFormData: Dispatch<SetStateAction<NegativeNoteFormData>>;
+  state: NegativeNoteFormState;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -38,6 +40,11 @@ export default function InputEvent({
               })
             }
           />
+          {state?.errors?.description?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
 
         <div className="grid gap-2">
@@ -69,6 +76,11 @@ export default function InputEvent({
               />
             </PopoverContent>
           </Popover>
+          {state?.errors?.when?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
 
         <div className="grid gap-2">
@@ -84,6 +96,11 @@ export default function InputEvent({
               })
             }
           />
+          {state?.errors?.where?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
 
         <div className="grid gap-2">
@@ -99,6 +116,11 @@ export default function InputEvent({
               })
             }
           />
+          {state?.errors?.withWhom?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
 
         <div className="grid gap-2">
@@ -114,6 +136,11 @@ export default function InputEvent({
               })
             }
           />
+          {state?.errors?.userAction?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
       </CardContent>
     </Card>

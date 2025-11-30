@@ -10,14 +10,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { negativeEmotions } from "@/lib/negative-notes/negative-emotions";
-import { NegativeNotesFormData } from "@/types/negative-notes";
+import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
 
 export default function InputEmotion({
   formData,
   setFormData,
+  state,
 }: {
-  formData: NegativeNotesFormData;
-  setFormData: Dispatch<SetStateAction<NegativeNotesFormData>>;
+  formData: NegativeNoteFormData;
+  setFormData: Dispatch<SetStateAction<NegativeNoteFormData>>;
+  state: NegativeNoteFormState;
 }) {
   return (
     <Card className="size-full">
@@ -50,6 +52,11 @@ export default function InputEmotion({
               </SelectGroup>
             </SelectContent>
           </Select>
+          {state?.errors?.emotion?.map((error: string) => (
+            <p className="text-red-500 text-sm" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
       </CardContent>
     </Card>
