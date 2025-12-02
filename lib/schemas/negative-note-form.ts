@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const NegativeNoteFormState = z.object({
+export const NegativeNoteFormSchema = z.object({
   emotion: z
     .string({
       message: "感情を入力して下さい。",

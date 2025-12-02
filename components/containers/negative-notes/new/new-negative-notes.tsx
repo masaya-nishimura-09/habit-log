@@ -36,6 +36,7 @@ export default function NewNegativeNotes() {
     e.preventDefault();
     setPending(true);
     setState(initialState);
+    console.log(formData);
     const result = await createNegativeNote(formData);
     if (result.success) {
       location.reload();
@@ -48,12 +49,12 @@ export default function NewNegativeNotes() {
 
   return (
     <div className="size-full flex flex-col gap-4">
+      <Toaster richColors position="top-center" />
       <form
         onSubmit={handleSubmit}
-        id="new-negavie-note"
+        id="new-negative-note"
         className="grid h-full md:grid-cols-2 gap-4"
       >
-        <Toaster richColors position="top-center" />
         <div className="flex h-full flex-col gap-4">
           <InputEvent formData={formData} setFormData={setFormData} state={state} />
           <InputEmotion formData={formData} setFormData={setFormData} state={state} />
@@ -69,7 +70,7 @@ export default function NewNegativeNotes() {
           {pending && <Spinner />}
           保存
         </Button>
-        <Button type="button" variant="outline" form="negative-note-form">
+        <Button type="button" variant="outline">
           キャンセル
         </Button>
       </div>
