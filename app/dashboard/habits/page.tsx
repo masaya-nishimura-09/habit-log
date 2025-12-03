@@ -13,7 +13,7 @@ export default async function Page() {
   const badHabits = await fetchHabits("bad");
 
   return (
-    <div className="h-full w-full">
+    <div className="size-full">
       <Tabs defaultValue="good" className="h-full w-full">
         <TabsList>
           <TabsTrigger value="good">続けたい習慣</TabsTrigger>

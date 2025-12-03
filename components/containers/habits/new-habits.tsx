@@ -67,7 +67,7 @@ export default function NewHabits() {
   return (
     <Button className="size-full">
       <Dialog>
-        <DialogTrigger>習慣を追加</DialogTrigger>
+        <DialogTrigger>新規作成</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>新しい習慣</DialogTitle>

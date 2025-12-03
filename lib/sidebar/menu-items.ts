@@ -2,6 +2,7 @@ import {
   IconCheckbox,
   IconHelp,
   IconHome,
+  IconMoodSadSquint,
   IconPencil,
   IconSearch,
   IconSettings,
@@ -25,6 +26,11 @@ export const items = {
       title: "習慣",
       url: `/dashboard/habits`,
       icon: IconCheckbox,
+    },
+    {
+      title: "ネガティブノート",
+      url: `/dashboard/negative-notes`,
+      icon: IconMoodSadSquint,
     },
   ],
   navSecondary: [
