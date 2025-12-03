@@ -48,31 +48,34 @@ export default function NewNegativeNotes() {
   }
 
   return (
-    <div className="size-full flex flex-col gap-4">
+    <div>
       <Toaster richColors position="top-center" />
-      <form
-        onSubmit={handleSubmit}
-        id="new-negative-note"
-        className="grid h-full md:grid-cols-2 gap-4"
-      >
-        <div className="flex h-full flex-col gap-4">
-          <InputEvent formData={formData} setFormData={setFormData} state={state} />
-          <InputEmotion formData={formData} setFormData={setFormData} state={state} />
+
+      <div className="flex size-full flex-col gap-4">
+        <form
+          onSubmit={handleSubmit}
+          id="new-negative-note"
+          className="grid h-full gap-4 md:grid-cols-2"
+        >
+          <div className="flex h-full flex-col gap-4">
+            <InputEvent formData={formData} setFormData={setFormData} state={state} />
+            <InputEmotion formData={formData} setFormData={setFormData} state={state} />
+          </div>
+          <div className="flex h-full flex-col gap-4">
+            <InputNegativeThoughts formData={formData} setFormData={setFormData} state={state} />
+            <InputPhysicalReaction formData={formData} setFormData={setFormData} state={state} />
+            <InputDesiredState formData={formData} setFormData={setFormData} state={state} />
+          </div>
+        </form>
+        <div className="flex gap-2">
+          <Button type="submit" form="new-negative-note" aria-disabled={pending}>
+            {pending && <Spinner />}
+            保存
+          </Button>
+          <Button type="button" variant="outline">
+            キャンセル
+          </Button>
         </div>
-        <div className="flex h-full flex-col gap-4">
-          <InputNegativeThoughts formData={formData} setFormData={setFormData} state={state} />
-          <InputPhysicalReaction formData={formData} setFormData={setFormData} state={state} />
-          <InputDesiredState formData={formData} setFormData={setFormData} state={state} />
-        </div>
-      </form>
-      <div className="flex gap-2">
-        <Button type="submit" form="new-negative-note" aria-disabled={pending}>
-          {pending && <Spinner />}
-          保存
-        </Button>
-        <Button type="button" variant="outline">
-          キャンセル
-        </Button>
       </div>
     </div>
   );

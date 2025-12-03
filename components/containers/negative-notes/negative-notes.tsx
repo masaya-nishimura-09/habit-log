@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -12,15 +14,19 @@ export default function NegativeNotes() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
-        <CardAction></CardAction>
+        <CardTitle>ネガティブノート一覧</CardTitle>
+        <CardDescription></CardDescription>
+        <CardAction>
+          <Button variant="default">
+            <Link href="/dashboard/negative-notes/new">新規作成</Link>
+          </Button>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <p>Card Content</p>
       </CardContent>
       <CardFooter>
-        <p>Card Footer</p>
+        <p>Footer</p>
       </CardFooter>
     </Card>
   );
