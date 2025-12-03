@@ -8,18 +8,21 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { formatDateToYYYYMMDD, getDateWithDayOfWeek } from "@/lib/date/date";
-import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
+import { NegativeNote, NegativeNoteFormState } from "@/types/negative-notes";
 
 export default function InputEvent({
   formData,
   setFormData,
   state,
 }: {
-  formData: NegativeNoteFormData;
-  setFormData: Dispatch<SetStateAction<NegativeNoteFormData>>;
+  formData: NegativeNote;
+  setFormData: Dispatch<SetStateAction<NegativeNote>>;
   state: NegativeNoteFormState;
 }) {
   const [open, setOpen] = useState(false);
+
+  const convertedDate = new Date(formData.when);
+  const [date, setDate] = useState<Date | undefined>(convertedDate);
 
   return (
     <Card className="size-full">
@@ -54,22 +57,21 @@ export default function InputEvent({
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <Button variant="outline" id="date" className="w-48 justify-between font-normal">
-                {formData.when
-                  ? getDateWithDayOfWeek(formatDateToYYYYMMDD(formData.when))
-                  : "日付を選択"}
+                {formData.when ? getDateWithDayOfWeek(formData.when) : "日付を選択"}
                 <ChevronDownIcon />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto overflow-hidden p-0" align="start">
               <Calendar
                 mode="single"
-                selected={formData.when}
+                selected={date}
                 captionLayout="dropdown"
                 onSelect={(date) => {
                   setFormData({
                     ...formData,
-                    when: date,
+                    when: formatDateToYYYYMMDD(date),
                   });
+                  setDate(date);
                   setOpen(false);
                 }}
                 locale={ja}

@@ -11,9 +11,16 @@ export const NegativeNoteFormSchema = z.object({
       message: "起きたことを入力して下さい。",
     })
     .min(1, "起きたことを入力して下さい。"),
-  when: z.date({
-    message: "時期を入力して下さい。",
-  }),
+  when: z
+    .string({
+      message: "時期を入力して下さい。",
+    })
+    .min(1, "時期を入力して下さい。"),
+  where: z
+    .string({
+      message: "場所を入力して下さい。",
+    })
+    .min(1, "場所を入力して下さい。"),
   withWhom: z
     .string({
       message: "関わった人を入力して下さい。",

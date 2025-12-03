@@ -2,15 +2,15 @@ import { Dispatch, SetStateAction } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
+import { NegativeNote, NegativeNoteFormState } from "@/types/negative-notes";
 
 export default function InputDesiredState({
   formData,
   setFormData,
   state,
 }: {
-  formData: NegativeNoteFormData;
-  setFormData: Dispatch<SetStateAction<NegativeNoteFormData>>;
+  formData: NegativeNote;
+  setFormData: Dispatch<SetStateAction<NegativeNote>>;
   state: NegativeNoteFormState;
 }) {
   return (

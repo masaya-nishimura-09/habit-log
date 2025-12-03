@@ -14,7 +14,6 @@ export const negativeEmotions: { jp: string; en: string }[] = [
   { jp: "無力感", en: "Helplessness" },
   { jp: "絶望", en: "Despair" },
   { jp: "緊張", en: "Tension" },
-  { jp: "苛立ち", en: "Frustration" },
   { jp: "悲観", en: "Pessimism" },
   { jp: "孤立感", en: "Isolation" },
   { jp: "疑念", en: "Doubt" },

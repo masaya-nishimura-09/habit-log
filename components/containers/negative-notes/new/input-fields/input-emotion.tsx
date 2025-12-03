@@ -10,15 +10,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { negativeEmotions } from "@/lib/negative-notes/negative-emotions";
-import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
+import { NegativeNote, NegativeNoteFormState } from "@/types/negative-notes";
 
 export default function InputEmotion({
   formData,
   setFormData,
   state,
 }: {
-  formData: NegativeNoteFormData;
-  setFormData: Dispatch<SetStateAction<NegativeNoteFormData>>;
+  formData: NegativeNote;
+  setFormData: Dispatch<SetStateAction<NegativeNote>>;
   state: NegativeNoteFormState;
 }) {
   return (

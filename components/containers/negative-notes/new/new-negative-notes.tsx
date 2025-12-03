@@ -5,7 +5,8 @@ import { Toaster, toast } from "sonner";
 import { createNegativeNote } from "@/actions/negative-notes-actions";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { NegativeNoteFormData, NegativeNoteFormState } from "@/types/negative-notes";
+import { formatDateToYYYYMMDD } from "@/lib/date/date";
+import { NegativeNote, NegativeNoteFormState } from "@/types/negative-notes";
 import InputDesiredState from "./input-fields/input-desired-state";
 import InputEmotion from "./input-fields/input-emotion";
 import InputEvent from "./input-fields/input-event";
@@ -18,10 +19,11 @@ export default function NewNegativeNotes() {
   const initialState: NegativeNoteFormState = { success: null, message: null, errors: {} };
   const [state, setState] = useState<NegativeNoteFormState>(initialState);
 
-  const [formData, setFormData] = useState<NegativeNoteFormData>({
+  const [formData, setFormData] = useState<NegativeNote>({
+    id: null,
     emotion: "Irritation",
     description: "",
-    when: today,
+    when: formatDateToYYYYMMDD(today),
     where: "",
     withWhom: "",
     userAction: "",
@@ -30,6 +32,7 @@ export default function NewNegativeNotes() {
     idealState: "",
     desiredTreatment: "",
     desiredFeeling: "",
+    createdAt: "",
   });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

@@ -9,8 +9,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { NegativeNote } from "@/types/negative-notes";
 
-export default function NegativeNotes() {
+export default function NegativeNotes({ negativeNotes }: { negativeNotes: NegativeNote[] }) {
+  console.log(negativeNotes);
+
   return (
     <Card>
       <CardHeader>

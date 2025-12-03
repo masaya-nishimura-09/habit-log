@@ -3,9 +3,9 @@
 import { getUserId } from "@/actions/user-actions";
 import { NegativeNoteFormSchema } from "@/lib/schemas/negative-note-form";
 import { supabase } from "@/lib/supabase";
-import { NegativeNoteFormData } from "@/types/negative-notes";
+import { NegativeNote } from "@/types/negative-notes";
 
-export async function createNegativeNote(formData: NegativeNoteFormData) {
+export async function createNegativeNote(formData: NegativeNote) {
   const validatedFields = NegativeNoteFormSchema.safeParse(formData);
 
   if (!validatedFields.success) {
@@ -26,6 +26,7 @@ export async function createNegativeNote(formData: NegativeNoteFormData) {
       emotion: validatedData.emotion,
       description: validatedData.description,
       when: validatedData.when,
+      where: validatedData.where,
       with_whom: validatedData.withWhom,
       user_action: validatedData.userAction,
       ideal_state: validatedData.idealState,
@@ -78,4 +79,69 @@ export async function createNegativeNote(formData: NegativeNoteFormData) {
   }
 
   return { success: true };
+}
+
+export async function fetchNegativeNotes() {
+  const userId = await getUserId();
+
+  const { data, error } = await supabase
+    .from("negative_notes")
+    .select(
+      `
+      id,
+      emotion,
+      description,
+      when,
+      where,
+      with_whom,
+      user_action,
+      ideal_state,
+      desired_treatment,
+      desired_feeling,
+      created_at,
+      negative_thoughts (
+        id,
+        name,
+        note_id
+      ),
+      reactions (
+        id,
+        name,
+        note_id
+      )`,
+    )
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Database Error:", error);
+    return [];
+  }
+  if (!data || data.length < 1) {
+    return [];
+  }
+
+  const convertedData = data.map((row) => ({
+    id: row.id,
+    emotion: row.emotion,
+    description: row.description,
+    when: row.when,
+    where: row.where,
+    withWhom: row.with_whom,
+    userAction: row.user_action,
+    idealState: row.ideal_state,
+    desiredTreatment: row.desired_treatment,
+    desiredFeeling: row.desired_feeling,
+    createdAt: row.created_at,
+    negativeThoughts: row.negative_thoughts.map((negativeThought) => ({
+      id: negativeThought.id,
+      name: negativeThought.name,
+    })),
+    reactions: row.reactions.map((reaction) => ({
+      id: reaction.id,
+      name: reaction.name,
+    })),
+  }));
+
+  return convertedData || [];
 }

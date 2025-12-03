@@ -33,10 +33,11 @@ export interface CBTEntry {
   desiredState: DesiredState;
 }
 
-export interface NegativeNoteFormData {
+export interface NegativeNote {
+  id: number | null;
   emotion: string;
   description: string;
-  when: Date | undefined;
+  when: string;
   where: string;
   withWhom: string;
   userAction: string;
@@ -51,6 +52,7 @@ export interface NegativeNoteFormData {
   idealState: string;
   desiredTreatment: string;
   desiredFeeling: string;
+  createdAt: string;
 }
 
 export interface NegativeNoteFormState {
