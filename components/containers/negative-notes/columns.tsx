@@ -1,9 +1,5 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
 import { deleteNegativeNote } from "@/actions/negative-notes-actions";
 import {
   AlertDialog,
@@ -27,13 +23,16 @@ import { Spinner } from "@/components/ui/spinner";
 import { getDateWithDayOfWeek } from "@/lib/date/date";
 import { negativeEmotions } from "@/lib/negative-notes/negative-emotions";
 import type { NegativeNote } from "@/types/negative-notes";
+import { ColumnDef } from "@tanstack/react-table";
+import { MoreHorizontal } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export const columns: ColumnDef<NegativeNote>[] = [
   {
     accessorKey: "when",
     header: "登録日",
     cell: ({ row }) => {
-      console.log(row);
       return <div>{getDateWithDayOfWeek(row.getValue("when"))}</div>;
     },
   },
