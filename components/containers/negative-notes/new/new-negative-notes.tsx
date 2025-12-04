@@ -39,7 +39,6 @@ export default function NewNegativeNotes() {
     e.preventDefault();
     setPending(true);
     setState(initialState);
-    console.log(formData);
     const result = await createNegativeNote(formData);
     if (result.success) {
       location.reload();

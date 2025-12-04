@@ -145,3 +145,18 @@ export async function fetchNegativeNotes() {
 
   return convertedData || [];
 }
+
+export async function deleteNegativeNote(negativeNoteId: number) {
+  const userId = await getUserId();
+
+  const { error } = await supabase
+    .from("negative_notes")
+    .delete()
+    .eq("user_id", userId)
+    .eq("id", negativeNoteId);
+
+  if (error) {
+    console.error("Database Error:", error);
+    throw new Error("ネガティブノートの削除に失敗しました。");
+  }
+}
