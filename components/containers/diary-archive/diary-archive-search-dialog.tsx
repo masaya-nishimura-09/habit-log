@@ -9,7 +9,6 @@ import type { DateRange } from "react-day-picker";
 import { fetchDiaries } from "@/actions/diaries-actions";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { CardAction, CardDescription, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -64,18 +63,14 @@ export default function DiaryArchiveSearchDialog({
   }
 
   return (
-    <div>
-      <CardTitle>過去の日記一覧</CardTitle>
-      <CardDescription></CardDescription>
-      <CardAction>
+    <Button className="size-full">
         <Dialog>
           <DialogTrigger>
-            <Button>詳細検索</Button>
+            詳細検索
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>詳細検索</DialogTitle>
-              <DialogDescription></DialogDescription>
             </DialogHeader>
             <div className="flex flex-col gap-6 py-4">
               <div className="grid gap-2">
@@ -154,7 +149,6 @@ export default function DiaryArchiveSearchDialog({
             </div>
           </DialogContent>
         </Dialog>
-      </CardAction>
-    </div>
+    </Button>
   );
 }
