@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import { createNegativeNote } from "@/actions/negative-notes-actions";
@@ -75,7 +76,7 @@ export default function NewNegativeNotes() {
             保存
           </Button>
           <Button type="button" variant="outline">
-            キャンセル
+            <Link href="/dashboard/negative-notes">キャンセル</Link>
           </Button>
         </div>
       </div>
