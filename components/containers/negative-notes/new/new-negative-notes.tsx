@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Toaster, toast } from "sonner";
 import { createNegativeNote } from "@/actions/negative-notes-actions";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { formatDateToYYYYMMDD } from "@/lib/date/date";
 import { NegativeNote, NegativeNoteFormState } from "@/types/negative-notes";
+import Link from "next/link";
+import { useState } from "react";
+import { Toaster, toast } from "sonner";
 import InputDesiredState from "./input-fields/input-desired-state";
 import InputEmotion from "./input-fields/input-emotion";
 import InputEvent from "./input-fields/input-event";
@@ -75,7 +76,7 @@ export default function NewNegativeNotes() {
             保存
           </Button>
           <Button type="button" variant="outline">
-            キャンセル
+            <Link href="/dashboard/negative-notes">キャンセル</Link>
           </Button>
         </div>
       </div>

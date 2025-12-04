@@ -25,6 +25,7 @@ import { negativeEmotions } from "@/lib/negative-notes/negative-emotions";
 import type { NegativeNote } from "@/types/negative-notes";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -80,6 +81,9 @@ export const columns: ColumnDef<NegativeNote>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
+            <DropdownMenuItem asChild>
+              <Link href={`/dashboard/negative-notes/${row.original.id}`}>詳細</Link>
+            </DropdownMenuItem>
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <DropdownMenuItem onSelect={(e) => e.preventDefault()}>削除</DropdownMenuItem>
