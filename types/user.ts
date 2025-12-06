@@ -23,3 +23,13 @@ export type LoginState = {
   };
   message?: string | null;
 };
+
+export type SettingsState = {
+  errors?: {
+    name?: string[];
+    email?: string[];
+    password?: string[];
+    confirmedPassword?: string[];
+  };
+  message?: string | null;
+};
