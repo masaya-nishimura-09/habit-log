@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { getUsername } from "@/actions/user-actions";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Diary } from "@/components/containers/home/diary";
+import { fetchDiary } from "@/actions/diaries-actions";
+import { getDateStr } from "@/lib/date/date";
 
 export const metadata: Metadata = {
   title: "ホーム",
@@ -15,21 +10,15 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const username = await getUsername();
+  const result = await fetchDiary(getDateStr());
 
   return (
-    <div className="size-full">
+    <div className="size-full flex flex-col gap-4">
       <div>
         <p className="text-xl font-semibold">おかえりなさい、{username}さん！</p>
       </div>
       <div>
-        <Card className="w-md">
-          <CardHeader>
-            <CardTitle></CardTitle>
-            <CardDescription></CardDescription>
-            <CardAction></CardAction>
-          </CardHeader>
-          <CardContent></CardContent>
-        </Card>
+        <Diary data={result.data} />
       </div>
     </div>
   );
