@@ -5,6 +5,7 @@ import { AuthError } from "next-auth";
 import { auth, signIn, signOut } from "@/auth";
 import { LoginFormSchema } from "@/lib/schemas/login-form";
 import { RegisterFormSchema } from "@/lib/schemas/register-form";
+import { SettingsFormSchema } from "@/lib/schemas/settings-form";
 import { supabase } from "@/lib/supabase";
 import type { LoginState, RegisterState } from "@/types/user";
 
@@ -98,4 +99,68 @@ export async function authenticate(_prevState: LoginState | undefined, formData:
 
 export async function logout() {
   await signOut({ redirectTo: "/" });
+}
+
+export async function getUserInfo() {
+  const userId = await getUserId();
+  const { data, error } = await supabase
+    .from("users")
+    .select("id, name, email")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function updateUser(formData: FormData) {
+  const validatedFields = SettingsFormSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+    confirmedPassword: formData.get("confirmed-password"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      success: false,
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "設定の更新に失敗しました。",
+    };
+  }
+
+  const { name, email, password } = validatedFields.data;
+  const userId = await getUserId();
+
+  const updateData: { name: string; email: string; password?: string } = {
+    name,
+    email,
+  };
+
+  if (password && password.length > 0) {
+    const saltRounds = 10;
+    updateData.password = await bcrypt.hash(password, saltRounds);
+  }
+
+  const { error } = await supabase.from("users").update(updateData).eq("id", userId);
+
+  if (error) {
+    console.error(error);
+    if (error.code === "23505") {
+      return {
+        success: false,
+        message: "このメールアドレスはすでに使用されています。",
+      };
+    }
+    return {
+      success: false,
+      message: "設定の更新に失敗しました。",
+    };
+  }
+
+  return { success: true };
 }
