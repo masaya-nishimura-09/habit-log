@@ -1,8 +1,10 @@
-export interface Habits {
+export interface Habit {
   id: number;
   userId: number;
   title: string;
   type: string;
+  start: string;
+  restart: string;
   updatedAt: string;
   createdAt: string;
 }

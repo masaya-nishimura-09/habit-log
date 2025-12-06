@@ -101,3 +101,19 @@ export async function deleteDiary(date: string) {
     };
   }
 }
+
+export async function getDiaryCount() {
+  const userId = await getUserId();
+
+  const { count, error } = await supabase
+    .from("diaries")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId);
+
+  if (error) {
+    console.error("Database Error:", error);
+    return 0;
+  }
+
+  return count || 0;
+}

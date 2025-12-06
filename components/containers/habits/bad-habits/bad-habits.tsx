@@ -11,9 +11,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useHabitsTable from "@/hooks/use-habits-table";
-import type { Habits } from "@/types/habits";
+import type { Habit } from "@/types/habits";
 
-export default function BadHabits({ data }: { data: Habits[] }) {
+export default function BadHabits({ data }: { data: Habit[] }) {
   const { table } = useHabitsTable(data);
 
   return (

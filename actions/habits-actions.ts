@@ -60,6 +60,52 @@ export async function fetchHabits(type: string) {
   return data || [];
 }
 
+export async function fetchLatestGoodHabits() {
+  const userId = await getUserId();
+
+  const { data, error} = await supabase
+    .from("habits")
+    .select()
+    .eq("user_id", userId)
+    .eq("type", "good")
+    .order("restart", { ascending: false })
+    .limit(5);
+
+  if (error) {
+    console.error("Database Error:", error);
+    return [];
+  }
+
+  if (!data || data.length < 1) {
+    return [];
+  }
+
+  return data || [];
+}
+
+export async function fetchLatestBadHabits() {
+  const userId = await getUserId();
+
+  const { data, error } = await supabase
+    .from("habits")
+    .select()
+    .eq("user_id", userId)
+    .eq("type", "bad")
+    .order("restart", { ascending: false })
+    .limit(5);
+
+  if (error) {
+    console.error("Database Error:", error);
+    return [];
+  }
+
+  if (!data || data.length < 1) {
+    return [];
+  }
+
+  return data || [];
+}
+
 export async function restartHabit(habitId: number, date: string) {
   const userId = await getUserId();
 
@@ -84,4 +130,44 @@ export async function deleteHabit(habitId: number) {
     console.error("Database Error:", error);
     throw new Error("習慣の削除に失敗しました。");
   }
+}
+
+export async function getHabitsCount() {
+  const userId = await getUserId();
+
+  const { count: totalCount, error: totalError } = await supabase
+    .from("habits")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId);
+
+  if (totalError) {
+    console.error("Database Error:", totalError);
+    return { good: 0, bad: 0, total: 0 };
+  }
+
+  const { count: goodCount, error: goodError } = await supabase
+    .from("habits")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId)
+    .eq("type", "good");
+
+  if (goodError) {
+    console.error("Database Error:", goodError);
+  }
+
+  const { count: badCount, error: badError } = await supabase
+    .from("habits")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId)
+    .eq("type", "bad");
+
+  if (badError) {
+    console.error("Database Error:", badError);
+  }
+
+  return {
+    good: goodCount || 0,
+    bad: badCount || 0,
+    total: totalCount || 0,
+  };
 }

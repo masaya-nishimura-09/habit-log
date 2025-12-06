@@ -10,9 +10,9 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { columns } from "@/components/containers/habits/columns";
-import { Habits } from "@/types/habits";
+import { Habit } from "@/types/habits";
 
-export default function useHabitsTable(habits: Habits[]) {
+export default function useHabitsTable(habits: Habit[]) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

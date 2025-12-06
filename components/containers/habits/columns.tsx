@@ -26,9 +26,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Spinner } from "@/components/ui/spinner";
 import { getDateStr, getDateWithDayOfWeek } from "@/lib/date/date";
-import type { Habits } from "@/types/habits";
+import type { Habit } from "@/types/habits";
 
-export const columns: ColumnDef<Habits>[] = [
+export const columns: ColumnDef<Habit>[] = [
   {
     accessorKey: "start",
     header: "開始日",

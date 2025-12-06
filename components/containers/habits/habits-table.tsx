@@ -10,9 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Habits } from "@/types/habits";
+import { Habit } from "@/types/habits";
 
-export default function HabitsTable({ table }: { table: TableType<Habits> }) {
+export default function HabitsTable({ table }: { table: TableType<Habit> }) {
   return (
     <div>
       <div className="overflow-hidden rounded-md border">

@@ -10,10 +10,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useHabitsTable from "@/hooks/use-habits-table";
-import type { Habits } from "@/types/habits";
+import type { Habit } from "@/types/habits";
 import HabitsTable from "../habits-table";
 
-export default function GoodHabits({ data }: { data: Habits[] }) {
+export default function GoodHabits({ data }: { data: Habit[] }) {
   const { table } = useHabitsTable(data);
 
   return (
