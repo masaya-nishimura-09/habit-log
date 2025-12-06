@@ -1,6 +1,8 @@
 "use client";
 
+import { IconChevronRight, IconMoodSadSquint } from "@tabler/icons-react";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,12 +12,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { NegativeNote } from "@/types/negative-notes";
 import { Label } from "@/components/ui/label";
 import { getDateWithDayOfWeek } from "@/lib/date/date";
 import { getEmotionJp } from "@/lib/negative-notes/negative-emotions";
-import { IconMoodSadSquint, IconChevronRight } from "@tabler/icons-react";
-import { Badge } from "@/components/ui/badge";
+import type { NegativeNote } from "@/types/negative-notes";
 
 export function NegativeNotes({ notes }: { notes: NegativeNote[] }) {
   const emotionColors: Record<string, string> = {
@@ -37,9 +37,7 @@ export function NegativeNotes({ notes }: { notes: NegativeNote[] }) {
             </div>
             <div>
               <CardTitle>ネガティブノート</CardTitle>
-              <CardDescription className="mt-1">
-                最近の記録
-              </CardDescription>
+              <CardDescription className="mt-1">最近の記録</CardDescription>
             </div>
           </div>
           {notes.length > 0 && (
@@ -52,7 +50,9 @@ export function NegativeNotes({ notes }: { notes: NegativeNote[] }) {
       <CardContent className="flex flex-1 flex-col gap-3">
         {notes.length > 0 ? (
           notes.map((note) => {
-            const emotionColor = emotionColors[note.emotion] || "bg-gray-50 text-gray-700 dark:bg-gray-950 dark:text-gray-400";
+            const emotionColor =
+              emotionColors[note.emotion] ||
+              "bg-gray-50 text-gray-700 dark:bg-gray-950 dark:text-gray-400";
             return (
               <div
                 key={note.id}
@@ -66,9 +66,7 @@ export function NegativeNotes({ notes }: { notes: NegativeNote[] }) {
                     {getEmotionJp(note.emotion)}
                   </Badge>
                 </div>
-                <p className="line-clamp-2 text-sm">
-                  {note.description}
-                </p>
+                <p className="line-clamp-2 text-sm">{note.description}</p>
               </div>
             );
           })

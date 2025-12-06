@@ -1,3 +1,5 @@
+import { IconCheckbox, IconMoodSadSquint, IconPencil, IconTrendingUp } from "@tabler/icons-react";
+import type { Metadata } from "next";
 import { fetchDiary, getDiaryCount } from "@/actions/diaries-actions";
 import {
   fetchLatestBadHabits,
@@ -11,8 +13,6 @@ import { Habits } from "@/components/containers/home/habits";
 import { NegativeNotes } from "@/components/containers/home/negative-notes";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getDateStr } from "@/lib/date/date";
-import { IconCheckbox, IconMoodSadSquint, IconPencil, IconTrendingUp } from "@tabler/icons-react";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "ホーム",

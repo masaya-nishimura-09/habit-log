@@ -26,7 +26,7 @@ export default function RegisterForm() {
     <Card className="mx-4 w-sm md:w-md">
       <div className="mb-8 flex items-center justify-center gap-2 text-primary">
         <IconNotebook className="size-10 bg-red" />
-        <span className="font-semibold text-2xl">Habit Log</span>
+        <span className="font-semibold text-2xl">Growth Journal</span>
       </div>
       <CardHeader>
         <CardTitle>会員登録</CardTitle>

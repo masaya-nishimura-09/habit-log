@@ -10,7 +10,7 @@ export default function Home() {
         <header className="flex items-center justify-between py-5">
           <div className="flex items-center gap-2 text-primary">
             <IconNotebook className="size-5 bg-red" />
-            <span className="font-semibold text-base">Habit Log</span>
+            <span className="font-semibold text-base">Growth Journal</span>
           </div>
           <nav className="flex items-center gap-3">
             <Link href="/login">
@@ -30,7 +30,7 @@ export default function Home() {
                 毎日の記録を、もっと簡単に。
               </h1>
               <p className="text-lg text-muted-foreground">
-                Habit Log
+                Growth Journal
                 は、続けたい習慣や日々の気づきを心地よく残せるシンプルな日誌アプリです。ダッシュボードで振り返り、習慣化を後押しします。
               </p>
               <div className="flex flex-wrap items-center gap-3">
@@ -50,7 +50,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="border-t py-6">
           <div className="flex items-center justify-between text-muted-foreground text-sm">
-            <span>© {new Date().getFullYear()} Habit Log</span>
+            <span>© {new Date().getFullYear()} Growth Journal</span>
           </div>
         </footer>
       </div>

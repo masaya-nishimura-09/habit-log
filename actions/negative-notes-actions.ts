@@ -288,7 +288,6 @@ export async function fetchLatestNegativeNotes(limit: number) {
   return convertedData || [];
 }
 
-
 export async function updateNegativeNote(formData: NegativeNote) {
   const validatedFields = NegativeNoteFormSchema.safeParse(formData);
 

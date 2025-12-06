@@ -1,6 +1,8 @@
 "use client";
 
+import { IconChevronRight, IconPencil } from "@tabler/icons-react";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,11 +12,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import { getDateStr, getDateWithDayOfWeek } from "@/lib/date/date";
 import type { Diary } from "@/types/diaries";
-import { Label } from "@/components/ui/label";
-import { IconPencil, IconChevronRight } from "@tabler/icons-react";
-import { Badge } from "@/components/ui/badge";
 
 export function Diary({ data }: { data?: Diary }) {
   const diaryData = [
@@ -41,7 +41,7 @@ export function Diary({ data }: { data?: Diary }) {
       title: "その他",
       text: data?.other || "未記入",
       isEmpty: !data?.other,
-    }
+    },
   ];
 
   const hasData = data && (data.done || data.learned || data.challenge || data.other);

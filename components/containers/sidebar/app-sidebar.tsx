@@ -1,7 +1,6 @@
 "use client";
 
 import { IconNotebook } from "@tabler/icons-react";
-// import { User } from "@/types/user";
 import {
   Sidebar,
   SidebarContent,
@@ -36,7 +35,7 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="/dashboard">
                 <IconNotebook className="size-5" />
-                <span className="font-semibold text-base">Habit Log</span>
+                <span className="font-semibold text-base">Growth Journal</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

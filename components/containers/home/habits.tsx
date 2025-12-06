@@ -1,6 +1,13 @@
 "use client";
 
+import {
+  IconArrowRight,
+  IconCheckbox,
+  IconChevronRight,
+  IconTrendingUp,
+} from "@tabler/icons-react";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,18 +17,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { Habit } from "@/types/habits";
 import { Label } from "@/components/ui/label";
 import { getStreak } from "@/lib/habits/get-streak";
-import { IconCheckbox, IconArrowRight, IconTrendingUp, IconChevronRight} from "@tabler/icons-react";
-import { Badge } from "@/components/ui/badge";
+import type { Habit } from "@/types/habits";
 
-export function Habits({ goodHabits, badHabits }: { goodHabits: Habit[], badHabits: Habit[] }) {
+export function Habits({ goodHabits, badHabits }: { goodHabits: Habit[]; badHabits: Habit[] }) {
   const totalHabits = goodHabits.length + badHabits.length;
   const maxStreak = Math.max(
     ...goodHabits.map((h) => getStreak(h.restart)),
     ...badHabits.map((h) => getStreak(h.restart)),
-    0
+    0,
   );
 
   return (
@@ -34,9 +39,7 @@ export function Habits({ goodHabits, badHabits }: { goodHabits: Habit[], badHabi
             </div>
             <div>
               <CardTitle>習慣</CardTitle>
-              <CardDescription className="mt-1">
-                {totalHabits}個の習慣を追跡中
-              </CardDescription>
+              <CardDescription className="mt-1">{totalHabits}個の習慣を追跡中</CardDescription>
             </div>
           </div>
           {maxStreak > 0 && (

@@ -21,8 +21,6 @@ export const negativeEmotions: { jp: string; en: string }[] = [
 ];
 
 export function getEmotionJp(emotionEn: string) {
-  const emotion = negativeEmotions.filter(
-    (negativeEmotion) => negativeEmotion.en === emotionEn,
-  );
-    return emotion[0].jp;
+  const emotion = negativeEmotions.filter((negativeEmotion) => negativeEmotion.en === emotionEn);
+  return emotion[0].jp;
 }

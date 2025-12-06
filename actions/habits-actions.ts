@@ -63,7 +63,7 @@ export async function fetchHabits(type: string) {
 export async function fetchLatestGoodHabits() {
   const userId = await getUserId();
 
-  const { data, error} = await supabase
+  const { data, error } = await supabase
     .from("habits")
     .select()
     .eq("user_id", userId)
