@@ -3,6 +3,8 @@ export interface Habit {
   userId: number;
   title: string;
   type: string;
+  start: string;
+  restart: string;
   updatedAt: string;
   createdAt: string;
 }

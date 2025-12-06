@@ -19,3 +19,10 @@ export const negativeEmotions: { jp: string; en: string }[] = [
   { jp: "疑念", en: "Doubt" },
   { jp: "疲労感", en: "Fatigue" },
 ];
+
+export function getEmotionJp(emotionEn: string) {
+  const emotion = negativeEmotions.filter(
+    (negativeEmotion) => negativeEmotion.en === emotionEn,
+  );
+    return emotion[0].jp;
+}

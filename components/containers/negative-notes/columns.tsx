@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Spinner } from "@/components/ui/spinner";
 import { getDateWithDayOfWeek } from "@/lib/date/date";
-import { negativeEmotions } from "@/lib/negative-notes/negative-emotions";
+import { getEmotionJp } from "@/lib/negative-notes/negative-emotions";
 import type { NegativeNote } from "@/types/negative-notes";
 
 export const columns: ColumnDef<NegativeNote>[] = [
@@ -41,10 +41,7 @@ export const columns: ColumnDef<NegativeNote>[] = [
     accessorKey: "emotion",
     header: "感情",
     cell: ({ row }) => {
-      const emotion = negativeEmotions.filter(
-        (negativeEmotion) => negativeEmotion.en === row.getValue("emotion"),
-      );
-      return <div>{emotion[0].jp}</div>;
+      return <div>{getEmotionJp(row.getValue("emotion"))}</div>;
     },
   },
   {

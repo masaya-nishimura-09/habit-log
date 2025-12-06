@@ -26,20 +26,27 @@ export function Habits({ goodHabits, badHabits }: { goodHabits: Habit[], badHabi
         <CardAction>
         </CardAction>
       </CardHeader>
-      <CardContent className="flex flex-col gap-6">
-        {goodHabits.map((habit) => (
-          <div key={habit.id} className="grid gap-2">
-            <Label>{habit.title}</Label>
-            <p>{getStreak(habit.updatedAt)}</p>
-          </div>
-        ))}
-        {badHabits.map((habit) => (
-          <div key={habit.id} className="grid gap-2">
-            <Label>{habit.title}</Label>
-          </div>
-        ))}
+      <CardContent className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col gap-6">
+            <Label>続けたい習慣</Label>
+          {goodHabits.map((habit) => (
+            <div key={habit.id} className="grid gap-2">
+              <Label>{habit.title}</Label>
+              <p>{getStreak(habit.restart)}日経過</p>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col gap-6">
+            <Label>辞めたい習慣</Label>
+          {badHabits.map((habit) => (
+            <div key={habit.id} className="grid gap-2">
+              <Label>{habit.title}</Label>
+              <p>{getStreak(habit.restart)}日経過</p>
+            </div>
+          ))}
+        </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="mt-auto">
         <Button type="button">
           <Link href="dashboard/habits">
             もっと見る

@@ -222,6 +222,73 @@ export async function fetchNegativeNotes() {
   return convertedData || [];
 }
 
+export async function fetchLatestNegativeNotes(limit: number) {
+  const userId = await getUserId();
+
+  const { data, error } = await supabase
+    .from("negative_notes")
+    .select(
+      `
+      id,
+      emotion,
+      description,
+      when,
+      where,
+      with_whom,
+      user_action,
+      ideal_state,
+      desired_treatment,
+      desired_feeling,
+      created_at,
+      negative_thoughts (
+        id,
+        name,
+        note_id
+      ),
+      reactions (
+        id,
+        name,
+        note_id
+      )`,
+    )
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error("Database Error:", error);
+    return [];
+  }
+  if (!data || data.length < 1) {
+    return [];
+  }
+
+  const convertedData = data.map((row) => ({
+    id: row.id,
+    emotion: row.emotion,
+    description: row.description,
+    when: row.when,
+    where: row.where,
+    withWhom: row.with_whom,
+    userAction: row.user_action,
+    idealState: row.ideal_state,
+    desiredTreatment: row.desired_treatment,
+    desiredFeeling: row.desired_feeling,
+    createdAt: row.created_at,
+    negativeThoughts: row.negative_thoughts.map((negativeThought) => ({
+      id: negativeThought.id,
+      name: negativeThought.name,
+    })),
+    reactions: row.reactions.map((reaction) => ({
+      id: reaction.id,
+      name: reaction.name,
+    })),
+  }));
+
+  return convertedData || [];
+}
+
+
 export async function updateNegativeNote(formData: NegativeNote) {
   const validatedFields = NegativeNoteFormSchema.safeParse(formData);
 
