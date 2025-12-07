@@ -8,7 +8,13 @@ export const SettingsFormSchema = z
       })
       .min(1, { message: "ユーザーネームを入力して下さい。" }),
     email: z.email({ message: "メールアドレスの形式で入力して下さい。" }),
-    password: z
+    currentPassword: z
+      .string({
+        message: "現在のパスワードを入力してください。",
+      })
+      .min(6, { message: "パスワードは6文字以上で入力して下さい。" })
+      .max(50, { message: "パスワードは50文字以内で入力して下さい。" }),
+    newPassword: z
       .string({
         message: "パスワードを入力してください。",
       })
@@ -16,7 +22,7 @@ export const SettingsFormSchema = z
       .max(50, { message: "パスワードは50文字以内で入力して下さい。" })
       .optional()
       .or(z.literal("")),
-    confirmedPassword: z
+    newConfirmedPassword: z
       .string({
         message: "確認用パスワードを入力してください。",
       })
@@ -25,7 +31,7 @@ export const SettingsFormSchema = z
       .optional()
       .or(z.literal("")),
   })
-  .refine((data) => !data.password || data.password === data.confirmedPassword, {
-    path: ["confirmedPassword"],
+  .refine((data) => !data.newPassword || data.newPassword === data.newConfirmedPassword, {
+    path: ["newConfirmedPassword"],
     message: "パスワードが一致しません。",
   });

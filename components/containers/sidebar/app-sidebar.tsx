@@ -16,7 +16,7 @@ import { NavSecondary } from "./nav-secondary";
 import { NavUser } from "./nav-user";
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
-  userData:
+  user:
     | {
         id?: string | undefined;
         name?: string | null | undefined;
@@ -46,7 +46,7 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
         <NavSecondary items={items.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser userData={props.userData} />
+        <NavUser user={props.user} />
       </SidebarFooter>
     </Sidebar>
   );

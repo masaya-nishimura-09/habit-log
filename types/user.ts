@@ -28,8 +28,9 @@ export type SettingsState = {
   errors?: {
     name?: string[];
     email?: string[];
-    password?: string[];
-    confirmedPassword?: string[];
+    currentPassword?: string[];
+    newPassword?: string[];
+    newConfirmedPassword?: string[];
   };
   message?: string | null;
 };

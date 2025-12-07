@@ -28,6 +28,39 @@ export async function getUsername() {
   return username;
 }
 
+export async function getUserInfo() {
+  const userId = await getUserId();
+  const { data, error } = await supabase
+    .from("users")
+    .select("id, name, email")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function checkPassword(email: string, password: string) {
+  try {
+    const { data, error } = await supabase.from("users").select().eq("email", email);
+
+    if (error) {
+      console.error("Supabase error:", error);
+      return false;
+    }
+
+    const passwordsMatch = await bcrypt.compare(password, data?.[0].password);
+    return passwordsMatch;
+  } catch (err) {
+    console.error("Unexpected error in getUser:", err);
+    return false;
+  }
+}
+
 export async function register(_prevState: RegisterState | undefined, formData: FormData) {
   const validatedFields = RegisterFormSchema.safeParse({
     name: formData.get("name"),
@@ -101,28 +134,13 @@ export async function logout() {
   await signOut({ redirectTo: "/" });
 }
 
-export async function getUserInfo() {
-  const userId = await getUserId();
-  const { data, error } = await supabase
-    .from("users")
-    .select("id, name, email")
-    .eq("id", userId)
-    .single();
-
-  if (error) {
-    console.error(error);
-    return null;
-  }
-
-  return data;
-}
-
 export async function updateUser(formData: FormData) {
   const validatedFields = SettingsFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
-    password: formData.get("password"),
-    confirmedPassword: formData.get("confirmed-password"),
+    currentPassword: formData.get("current-password"),
+    newPassword: formData.get("new-password"),
+    newConfirmedPassword: formData.get("new-confirmed-password"),
   });
 
   if (!validatedFields.success) {
@@ -133,17 +151,26 @@ export async function updateUser(formData: FormData) {
     };
   }
 
-  const { name, email, password } = validatedFields.data;
+  const { name, email, currentPassword, newPassword } = validatedFields.data;
   const userId = await getUserId();
+
+  const passwordsMatch = await checkPassword(email, currentPassword);
+
+  if (!passwordsMatch) {
+    return {
+      success: false,
+      message: "設定の更新に失敗しました。",
+    };
+  }
 
   const updateData: { name: string; email: string; password?: string } = {
     name,
     email,
   };
 
-  if (password && password.length > 0) {
+  if (newPassword && newPassword.length > 0) {
     const saltRounds = 10;
-    updateData.password = await bcrypt.hash(password, saltRounds);
+    updateData.password = await bcrypt.hash(newPassword, saltRounds);
   }
 
   const { error } = await supabase.from("users").update(updateData).eq("id", userId);
@@ -161,6 +188,12 @@ export async function updateUser(formData: FormData) {
       message: "設定の更新に失敗しました。",
     };
   }
+
+  await signIn("credentials", {
+    email,
+    password: currentPassword,
+    redirect: false,
+  });
 
   return { success: true };
 }
