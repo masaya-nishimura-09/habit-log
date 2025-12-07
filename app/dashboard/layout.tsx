@@ -4,7 +4,7 @@ import { AppSidebar } from "@/components/containers/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const userData = await getUserSession();
+  const user = await getUserSession();
 
   return (
     <SidebarProvider
@@ -15,7 +15,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" userData={userData} />
+      <AppSidebar variant="inset" user={user} />
       <SidebarInset className="flex h-100vh flex-col">
         <SiteHeader />
         <main className="h-full p-4">{children}</main>

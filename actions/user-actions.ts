@@ -28,6 +28,39 @@ export async function getUsername() {
   return username;
 }
 
+export async function getUserInfo() {
+  const userId = await getUserId();
+  const { data, error } = await supabase
+    .from("users")
+    .select("id, name, email")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function checkPassword(email: string, password: string) {
+  try {
+    const { data, error } = await supabase.from("users").select().eq("email", email);
+
+    if (error) {
+      console.error("Supabase error:", error);
+      return false;
+    }
+
+    const passwordsMatch = await bcrypt.compare(password, data?.[0].password);
+    return passwordsMatch;
+  } catch (err) {
+    console.error("Unexpected error in getUser:", err);
+    return false;
+  }
+}
+
 export async function register(_prevState: RegisterState | undefined, formData: FormData) {
   const validatedFields = RegisterFormSchema.safeParse({
     name: formData.get("name"),
@@ -101,22 +134,6 @@ export async function logout() {
   await signOut({ redirectTo: "/" });
 }
 
-export async function getUserInfo() {
-  const userId = await getUserId();
-  const { data, error } = await supabase
-    .from("users")
-    .select("id, name, email")
-    .eq("id", userId)
-    .single();
-
-  if (error) {
-    console.error(error);
-    return null;
-  }
-
-  return data;
-}
-
 export async function updateUser(formData: FormData) {
   const validatedFields = SettingsFormSchema.safeParse({
     name: formData.get("name"),
@@ -134,28 +151,16 @@ export async function updateUser(formData: FormData) {
     };
   }
 
-  const { name, email, newPassword } = validatedFields.data;
+  const { name, email, currentPassword, newPassword } = validatedFields.data;
   const userId = await getUserId();
-  const newFormData = new FormData();
-  newFormData.append("email", email);
-  newFormData.append("password", newPassword);
 
-  try {
-    await signIn("credentials", newFormData);
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return {
-            message: "メールアドレスまたはパスワードに誤りがあります。",
-          };
-        default:
-          return {
-            message: "ログインに失敗しました。",
-          };
-      }
-    }
-    throw error;
+  const passwordsMatch = await checkPassword(email, currentPassword);
+
+  if (!passwordsMatch) {
+    return {
+      success: false,
+      message: "設定の更新に失敗しました。",
+    };
   }
 
   const updateData: { name: string; email: string; password?: string } = {
@@ -183,6 +188,12 @@ export async function updateUser(formData: FormData) {
       message: "設定の更新に失敗しました。",
     };
   }
+
+  await signIn("credentials", {
+    email,
+    password: currentPassword,
+    redirect: false,
+  });
 
   return { success: true };
 }

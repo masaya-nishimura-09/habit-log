@@ -22,9 +22,9 @@ import {
 } from "@/components/ui/sidebar";
 
 export function NavUser({
-  userData,
+  user,
 }: {
-  userData:
+  user:
     | {
         id?: string | undefined;
         name?: string | null | undefined;
@@ -48,8 +48,8 @@ export function NavUser({
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{userData?.name}</span>
-                <span className="truncate text-muted-foreground text-xs">{userData?.email}</span>
+                <span className="truncate font-medium">{user?.name}</span>
+                <span className="truncate text-muted-foreground text-xs">{user?.email}</span>
               </div>
               <IconDotsVertical className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -66,8 +66,8 @@ export function NavUser({
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{userData?.name}</span>
-                  <span className="truncate text-muted-foreground text-xs">{userData?.email}</span>
+                  <span className="truncate font-medium">{user?.name}</span>
+                  <span className="truncate text-muted-foreground text-xs">{user?.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
