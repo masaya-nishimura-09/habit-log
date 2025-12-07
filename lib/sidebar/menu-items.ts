@@ -1,10 +1,8 @@
 import {
   IconCheckbox,
-  IconHelp,
   IconHome,
   IconMoodSadSquint,
   IconPencil,
-  IconSearch,
   IconSettings,
 } from "@tabler/icons-react";
 import { getDateStr } from "@/lib/date/date";
@@ -32,22 +30,11 @@ export const items = {
       url: `/dashboard/negative-notes`,
       icon: IconMoodSadSquint,
     },
-  ],
-  navSecondary: [
     {
       title: "設定",
       url: "/dashboard/settings",
       icon: IconSettings,
     },
-    {
-      title: "ヘルプ",
-      url: "/dashboard/help",
-      icon: IconHelp,
-    },
-    {
-      title: "探す",
-      url: "/dashboard/search",
-      icon: IconSearch,
-    },
   ],
+  navSecondary: [],
 };

@@ -1,14 +1,12 @@
 "use client";
 
-import { IconDotsVertical, IconLogout, IconUserCircle } from "@tabler/icons-react";
-import Link from "next/link";
+import { IconDotsVertical, IconLogout } from "@tabler/icons-react";
 import { logout } from "@/actions/user-actions";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -71,17 +69,6 @@ export function NavUser({
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem className="p-0">
-                <Button type="button" variant="ghost" className="w-full justify-start p-2">
-                  <Link href="dashboard/account" className="flex items-center gap-2">
-                    <IconUserCircle />
-                    アカウント
-                  </Link>
-                </Button>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <IconLogout />
