@@ -121,8 +121,9 @@ export async function updateUser(formData: FormData) {
   const validatedFields = SettingsFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
-    password: formData.get("password"),
-    confirmedPassword: formData.get("confirmed-password"),
+    currentPassword: formData.get("current-password"),
+    newPassword: formData.get("new-password"),
+    newConfirmedPassword: formData.get("new-confirmed-password"),
   });
 
   if (!validatedFields.success) {
@@ -133,17 +134,38 @@ export async function updateUser(formData: FormData) {
     };
   }
 
-  const { name, email, password } = validatedFields.data;
+  const { name, email, newPassword } = validatedFields.data;
   const userId = await getUserId();
+  const newFormData = new FormData();
+  newFormData.append("email", email);
+  newFormData.append("password", newPassword);
+
+  try {
+    await signIn("credentials", newFormData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return {
+            message: "メールアドレスまたはパスワードに誤りがあります。",
+          };
+        default:
+          return {
+            message: "ログインに失敗しました。",
+          };
+      }
+    }
+    throw error;
+  }
 
   const updateData: { name: string; email: string; password?: string } = {
     name,
     email,
   };
 
-  if (password && password.length > 0) {
+  if (newPassword && newPassword.length > 0) {
     const saltRounds = 10;
-    updateData.password = await bcrypt.hash(password, saltRounds);
+    updateData.password = await bcrypt.hash(newPassword, saltRounds);
   }
 
   const { error } = await supabase.from("users").update(updateData).eq("id", userId);

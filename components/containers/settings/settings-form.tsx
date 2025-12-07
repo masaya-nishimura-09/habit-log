@@ -94,10 +94,10 @@ export default function SettingsForm({ initialData }: SettingsFormProps) {
                 </div>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="password">パスワード（変更する場合のみ）</Label>
-                <Input id="password" name="password" type="password" />
+                <Label htmlFor="current-password">現在のパスワード</Label>
+                <Input id="current-password" name="current-password" type="password" />
                 <div aria-live="polite" aria-atomic="true">
-                  {state?.errors?.password?.map((error: string) => (
+                  {state?.errors?.currentPassword?.map((error: string) => (
                     <p className="mt-2 text-red-500 text-sm" key={error}>
                       {error}
                     </p>
@@ -105,10 +105,21 @@ export default function SettingsForm({ initialData }: SettingsFormProps) {
                 </div>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="confirmed-password">確認用パスワード（変更する場合のみ）</Label>
-                <Input id="confirmed-password" name="confirmed-password" type="password" />
+                <Label htmlFor="new-password">パスワード（変更する場合のみ）</Label>
+                <Input id="new-password" name="new-password" type="password" />
                 <div aria-live="polite" aria-atomic="true">
-                  {state?.errors?.confirmedPassword?.map((error: string) => (
+                  {state?.errors?.newPassword?.map((error: string) => (
+                    <p className="mt-2 text-red-500 text-sm" key={error}>
+                      {error}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="new-confirmed-password">確認用パスワード（変更する場合のみ）</Label>
+                <Input id="new-confirmed-password" name="new-confirmed-password" type="password" />
+                <div aria-live="polite" aria-atomic="true">
+                  {state?.errors?.newConfirmedPassword?.map((error: string) => (
                     <p className="mt-2 text-red-500 text-sm" key={error}>
                       {error}
                     </p>
