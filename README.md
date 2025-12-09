@@ -1,1 +1,1 @@
-# habit-log
+# Growth Journal
