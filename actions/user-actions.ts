@@ -197,3 +197,16 @@ export async function updateUser(formData: FormData) {
 
   return { success: true };
 }
+
+export async function deleteUser() {
+  const userId = await getUserId();
+
+  const { error } = await supabase.from("users").delete().eq("id", userId);
+
+  if (error) {
+    console.error("Database Error:", error);
+    throw new Error("アカウントの削除に失敗しました。");
+  }
+
+  await signOut({ redirectTo: "/account/delete" });
+}
