@@ -42,9 +42,6 @@ export function NavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-              </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user?.name}</span>
                 <span className="truncate text-muted-foreground text-xs">{user?.email}</span>
@@ -60,9 +57,6 @@ export function NavUser({
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user?.name}</span>
                   <span className="truncate text-muted-foreground text-xs">{user?.email}</span>
@@ -71,10 +65,12 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <IconLogout />
-              <form action={logout} className="">
+              <form action={logout} className="w-full">
                 <Button variant="ghost" type="submit" className="w-full p-0">
-                  <div className="font-bold">ログアウト</div>
+                  <div className="font-bold flex gap-1 items-center w-full">
+                    <IconLogout />
+                    <span>ログアウト</span>
+                  </div>
                 </Button>
               </form>
             </DropdownMenuItem>
